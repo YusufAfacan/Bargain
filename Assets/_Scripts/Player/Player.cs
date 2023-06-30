@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Altar>() == true && engagedBattle == false)
         {
-            altarPanel.gameObject.SetActive(true);
+            
             Altar altar = collision.gameObject.GetComponent<Altar>();
 
             canMove = false;
@@ -108,14 +108,14 @@ public class Player : MonoBehaviour
         battleUI.SetActive(true);
         engagedBattle = true;
         canMove = false;
-        FillHand();
+        DeckToHand();
         enemy.GetReadyForBattle();
         
         cam.GetComponent<CameraController>().Zoom(enemy);
    
     }
 
-    public void FillHand()
+    public void DeckToHand()
     {
         for (int i = 0; i < handSize; i++)
         {
@@ -167,39 +167,55 @@ public class Player : MonoBehaviour
 
     private void PlayCard(Card card)
     {
+        HalveArmor(card.cardData.castTime);
+
         if (card.cardData.cardType == CardData.CardType.Attack)
         {
-            if (card.cardData.attackType == CardData.AttackType.Single)
-            {
-                int damageOutput = DamageOutput(card.cardData.singleTargetDamageAmount);
+            int damageOutput = DamageOutput(card.cardData.singleTargetDamageAmount);
 
-                targetEnemy.TakeDamage(damageOutput);
+            targetEnemy.TakeDamage(damageOutput);
 
-                if (card.suffix != null && card.suffix.mainType == Suffix.MainType.Offensive)
-                {
-                    if (card.suffix.Imbuetype == Suffix.ImbueType.Igni)
-                    {
-                        targetEnemy.ApplyCondition(Suffix.ImbueType.Igni, damageOutput);
-                    }
-                }
-            }
+        }
+
+        if (card.prefix != null && card.prefix.mainType == Prefix.MainType.HealthGrant)
+        {
+            
+        }
+
+        if (card.suffix != null && card.suffix.mainType == Suffix.MainType.HealthGrant)
+        {
+            
         }
 
         CheckSkills(card);
 
-        if(targetEnemy.health > 0)
+        HandToDiscardPile();
+
+       
+        if (targetEnemy.health > 0)
         {
-            DiscardHand();
-            FillHand();
+            
+            DeckToHand();
             targetEnemy.ReduceNextAttackTime(card.cardData.castTime);
             
+
         }
-        else if (targetEnemy.health <= 0 || targetEnemy == null)
+
+        if (targetEnemy.health <= 0)
         {
-            targetEnemy.Die();
-            DiscardHand();
+            DiscardPileToDeck();
+            
             WinBattle();
+            targetEnemy.Die();
+            
         }
+
+
+    }
+
+    private void HalveArmor(int castTime)
+    {
+        armor.value /= (int)Mathf.Pow(2, castTime);
     }
 
     private void CheckSkills(Card card)
@@ -224,7 +240,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void DiscardHand()
+    public void HandToDiscardPile()
     {
         for (int i = 0; i < handSize; i++)
         {
@@ -241,18 +257,13 @@ public class Player : MonoBehaviour
         canMove = true;
 
         battleUI.SetActive(false);
-        DiscardPileToDeck();
-        HandToDeck();
+        armor.value = 0;
+        UpdateArmorText();
+        
 
     }
 
-    private void HandToDeck()
-    {
-        for (int i = 0; i < playerHand.childCount; i++)
-        {
-            playerHand.GetChild(0).SetParent(playerDeck);
-        }
-    }
+    
 
     public int DamageOutput(int carddamage)
     {

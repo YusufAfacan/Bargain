@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,7 +18,7 @@ public class Card : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     private Transform discardPile;
     private Transform battleCanvas;
 
-    
+    public Prefix prefix;
     public CardData cardData;
     public Suffix suffix;
 

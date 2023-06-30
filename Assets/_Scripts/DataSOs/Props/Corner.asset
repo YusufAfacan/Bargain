@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd4d921aed0ded4e947ec1bec5d2055, type: 3}
   m_Name: Corner
   m_EditorClassIdentifier: 
-  PropSprite: {fileID: -818659787113659478, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
+  PropSprite: {fileID: 21300106, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   PropSize: {x: 1, y: 1}
   Corner: 1
   NearWallUP: 0

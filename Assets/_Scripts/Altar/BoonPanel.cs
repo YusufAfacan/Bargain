@@ -15,7 +15,7 @@ public class BoonPanel : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         activeAltar = player.contactedAltar;
-        button.onClick.AddListener(activeAltar.GrantBoon);
+        
         
     }
 
@@ -23,7 +23,7 @@ public class BoonPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        button.onClick.AddListener(activeAltar.GrantBoon);
     }
 
     // Update is called once per frame

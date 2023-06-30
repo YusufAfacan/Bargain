@@ -13,8 +13,12 @@ public class AgentPlacer : MonoBehaviour
     private GameObject altarPrefab;
     [SerializeField]
     public Transform enemyParent;
+    [SerializeField] 
+    public Transform altarParent;
     [SerializeField]
     private Transform player;
+
+    private bool placeAltar = false;
     //private GameObject playerPrefab;
 
     //[SerializeField]
@@ -44,12 +48,19 @@ public class AgentPlacer : MonoBehaviour
         if (dungeonData == null)
             return;
 
+        Room roomWithPlayer = null;
+
         //Loop for each room
         for (int i = 0; i < dungeonData.Rooms.Count; i++)
         {
             //TO place eneies we need to analyze the room tiles to find those accesible from the path
             Room room = dungeonData.Rooms[i];
             RoomGraph roomGraph = new RoomGraph(room.FloorTiles);
+
+            if (room.FloorTiles.Contains(Vector2Int.zero))
+            {
+                roomWithPlayer = room;
+            }
 
             //Find the Path inside this specific room
             HashSet<Vector2Int> roomFloor = new HashSet<Vector2Int>(room.FloorTiles);
@@ -77,49 +88,19 @@ public class AgentPlacer : MonoBehaviour
 
             }
 
-            GameObject altarObj = Instantiate(altarPrefab);
-            altarObj.transform.SetParent(enemyParent);
-            altarObj.transform.localPosition = (Vector2)room.PositionsAccessibleFromPath[room.EnemiesInTheRoom.Count] + Vector2.one * 0.5f;
-
+            if (placeAltar)
+            {
+                GameObject altarObj = Instantiate(altarPrefab);
+                altarObj.transform.SetParent(altarParent);
+                altarObj.transform.localPosition = (Vector2)room.PositionsAccessibleFromPath[room.EnemiesInTheRoom.Count] + Vector2.one * 0.5f;
+            }
             
 
+        }
 
-
-
-            //foreach (MobGroup mobGroup in roomHostilityStructure.mobGroupsInRoom)
-            //{
-            //    Debug.Log(roomHostilityStructure.mobGroupsInRoom);
-
-
-            //    if (room.PositionsAccessibleFromPath.Count <= j)
-            //    {
-            //        return;
-            //    }
-            //    GameObject enemy = Instantiate(enemyPrefab);
-            //    enemy.transform.SetParent(enemyParent);
-            //    enemy.GetComponent<Enemy>().health = roomHostilityStructure.mobGroupsInRoom[j].enemy.health;
-            //    enemy.transform.localPosition = (Vector2)room.PositionsAccessibleFromPath[j] + Vector2.one * 0.5f;
-            //    room.EnemiesInTheRoom.Add(enemy);
-            //}
-
-
-
-            //did we add this room to the roomEnemiesCount list?
-            //if (roomEnemiesCount.Count > i)
-            //{
-            //    PlaceEnemies(room, roomEnemiesCount[i]);
-            //}
-
-            //Place the player
-            //if(i==playerRoomIndex)
-            //{
-            //GameObject player = Instantiate(playerPrefab);
-            //player.transform.localPosition = dungeonData.Rooms[i].RoomCenterPos + Vector2.one*0.5f;
-            //Make the camera follow the player
-            //vCamera.Follow = player.transform;
-            //vCamera.LookAt = player.transform;
-            //dungeonData.PlayerReference = player;
-            //}
+        foreach (GameObject enemy in roomWithPlayer.EnemiesInTheRoom)
+        {
+            enemy.gameObject.SetActive(false);
         }
     }
 

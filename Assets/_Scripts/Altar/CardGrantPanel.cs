@@ -19,13 +19,13 @@ public class CardGrantPanel : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         activeAltar = player.contactedAltar;
-        button.onClick.AddListener(activeAltar.GrantCard);
+        
         
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        button.onClick.AddListener(activeAltar.GrantCard);
     }
 
     // Update is called once per frame

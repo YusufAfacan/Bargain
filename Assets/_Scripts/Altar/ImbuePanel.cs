@@ -20,14 +20,14 @@ public class ImbuePanel : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         activeAltar = player.contactedAltar;
-        button.onClick.AddListener(activeAltar.Imbue);
+        
         
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        button.onClick.AddListener(activeAltar.Imbue);
     }
 
     // Update is called once per frame

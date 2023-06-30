@@ -259,8 +259,8 @@ public class PropPlacementManager : MonoBehaviour
         {
             if (UnityEngine.Random.value < tempChance)
             {
-                Prop propToPlace 
-                    = cornerProps[UnityEngine.Random.Range(0, cornerProps.Count)];
+                Prop propToPlace = cornerProps[UnityEngine.Random.Range(0, cornerProps.Count)];
+
 
                 PlacePropGameObjectAt(room, cornerTile, propToPlace);
                 if (propToPlace.PlaceAsGroup)

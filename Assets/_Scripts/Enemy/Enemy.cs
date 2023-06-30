@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public int difficultyCoefficent;
     public int aggressionRange = 1;
     private Vector3 target;
-    private NavMeshAgent agent;
+    
     private Player player;
     public bool followPlayer;
 
@@ -26,7 +26,11 @@ public class Enemy : MonoBehaviour
     public float nextBehaviourTime;
     public float actionDelay;
     public Resistance fireResistance;
+    public Resistance stunResistance;
+    public Resistance fearResistance;
+    public Resistance slowResistance;
     public bool isBurning;
+    public bool isStunned;
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI armorText;
@@ -41,9 +45,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        
         followPlayer = true;
     }
 
@@ -159,18 +161,33 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void ApplyCondition(Suffix.ImbueType imbueType, int damageOutput)
-    {
-        if (imbueType == Suffix.ImbueType.Igni)
-        {
-            fireResistance.currentAmount += damageOutput;
+    //public void ApplyCondition(Suffix.Subtype imbueType, int damageOutput)
+    //{
+    //    if (imbueType == Suffix.Subtype.Igni)
+    //    {
+    //        fireResistance.currentAmount += damageOutput;
 
-            if (fireResistance.currentAmount >= fireResistance.maxResistance)
-            {
-                isBurning = true;
-            }
-        }
-    }
+    //        if (fireResistance.currentAmount >= fireResistance.maxResistance)
+    //        {
+    //            isBurning = true;
+    //        }
+    //    }
+
+
+    //}
+
+    //public void ApplyCondition(Prefix.Subtype imbueType, int damageOutput)
+    //{
+    //    if (imbueType == Prefix.Subtype.Devastating)
+    //    {
+    //        stunResistance.currentAmount += damageOutput;
+
+    //        if (stunResistance.currentAmount >= stunResistance.maxResistance)
+    //        {
+    //            isStunned = true;
+    //        }
+    //    }
+    //}
 
     public void Die()
     {

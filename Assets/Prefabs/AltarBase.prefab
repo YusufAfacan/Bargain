@@ -450,7 +450,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5860325458425312261, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
+  m_Sprite: {fileID: 21300058, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -498,15 +498,15 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.8125, y: 2.0625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &1692977969117410277
 MonoBehaviour:
@@ -523,24 +523,23 @@ MonoBehaviour:
   altarType: 0
   offerType: 0
   NameText: {fileID: 0}
-  cardsToGrant: []
+  cardBasePrefab: {fileID: 7432191855272590426, guid: 34b6231b35be6164c80d3a19e4226b79, type: 3}
+  RedAltarPrefixesToGrant:
+  - {fileID: 0}
+  RedAltarSuffixesToGrant:
+  - {fileID: 0}
+  RedAltarBoonToGrant:
+  - {fileID: 0}
   redAltarCardsToGrant:
   - {fileID: 11400000, guid: 2363362303994ab469404870c642a020, type: 2}
-  cardToGrant: {fileID: 0}
-  RedAltarSuffixsToGrant:
-  - {fileID: 11400000, guid: 1150978e8bc236e4fb54c1a8473e1bd6, type: 2}
-  RedAltarBoonToGrant:
-  - Name: 
-    type: 0
-    duration: 0
-    amount: 5
-  suffixToGrant: {fileID: 0}
-  boonToGrant:
-    Name: 
-    type: 0
-    duration: 0
-    amount: 0
-  cardBasePrefab: {fileID: 7432191855272590426, guid: 34b6231b35be6164c80d3a19e4226b79, type: 3}
+  BlackAltarPrefixesToGrant: []
+  BlackAltarSuffixesToGrant: []
+  BlackAltarBoonToGrant: []
+  blackAltarCardsToGrant: []
+  BlueAltarPrefixesToGrant: []
+  BlueAltarSuffixesToGrant: []
+  BlueAltarBoonToGrant: []
+  blueAltarCardsToGrant: []
 --- !u!1 &9054525748033343165
 GameObject:
   m_ObjectHideFlags: 0
